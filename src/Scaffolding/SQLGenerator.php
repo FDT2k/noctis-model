@@ -1,8 +1,9 @@
 <?php
-namespace GKA\Noctis\Model\Scaffolding
+namespace GKA\Noctis\Model\Scaffolding;
+
 use \FDT2k\ICE\CORE\Env as Env;
 
-class SQLGenerator extends \ICE\core\IObject {
+class SQLGenerator extends \FDT2k\ICE\CORE\IObject {
 
 
 	// generate a select query
