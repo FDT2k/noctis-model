@@ -125,7 +125,7 @@ class Database extends AbstractModel{
 	}
 
 	function prepareQuery($query,$values){
-	//	throw  new \ICE\core\Exception("debug",0);
+	//	throw  new ModelException("debug",0);
 		if(is_array($values)){
 			foreach($values as $key => $value){
 				$value = $this->prepareValue($value);
@@ -309,7 +309,7 @@ class Database extends AbstractModel{
 
 				$this->setError($this->db->getErrorString());
 				if(Env::getConfig('database')->get('strict')){
-					throw new \ICE\core\Exception("Query error: ".$this->db->getErrorString(),0);
+					throw new ModelException("Query error: ".$this->db->getErrorString(),0);
 				}
 			}
 		}
@@ -336,7 +336,7 @@ class Database extends AbstractModel{
 		}else{
 			$this->setError($this->db->getErrorString());
 			if(Env::getConfig('database')->get('strict')){
-				throw new \ICE\core\Exception("Query error: ".$this->db->getErrorString(),0);
+				throw new ModelException("Query error: ".$this->db->getErrorString(),0);
 			}
 		}
 	//	var_dump($query,$result);
