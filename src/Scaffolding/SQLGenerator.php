@@ -55,7 +55,7 @@ class SQLGenerator extends \FDT2k\ICE\CORE\IObject {
 
 	function assertArray($var){
 		if (!is_array($var)){
-			throw new \ICE\core\Exception("Not an array",0);
+			throw new ModelException("Not an array",0);
 		}
 	}
 
@@ -314,7 +314,7 @@ TODO multiple constraint / PKEY
 						$inner .= $separator." `".$e->getTable()."` on `".$this->getTable()."`.`".$field->getName()."`=`".$e->getTable()."`.`".$pkeys[0]->getName()."`";
 						$separator = ",";
 					}else{
-						throw new \ICE\core\Exception("Can't handle multiple primary key in this context",0);
+						throw new ModelException("Can't handle multiple primary key in this context",0);
 					}
 
 				}

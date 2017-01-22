@@ -43,7 +43,7 @@ class Entity extends \FDT2k\ICE\CORE\IObject {
 					}
 				}
 				else{
-					throw new \ICE\core\Exception('Table not found: '.$table,0);
+					throw new ModelException('Table not found: '.$table,0);
 				}
 			}
 		}
@@ -193,7 +193,7 @@ class Entity extends \FDT2k\ICE\CORE\IObject {
 			$result = $this->getDB()->executeUpdate($s);
 
 			if(!$result){
-					throw new \ICE\core\Exception('SQL ERROR: '.$this->getDB()->getErrorString(),0);
+					throw new ModelException('SQL ERROR: '.$this->getDB()->getErrorString(),0);
 			}
 		///	var_dump($s);
 		//	var_dump($this->getDB()->getErrorString());
@@ -687,7 +687,7 @@ function onePKName(){
 		}
 
 		if(sizeof($fields)==0){
-			throw \ICE\core\Exception("No primary key defined");
+			throw ModelException("No primary key defined");
 		}
 
 		$q = $this->sqlgen->delete($fields)->where($fields)->query();
@@ -697,14 +697,14 @@ function onePKName(){
 
 	function executeUpdate(){
 		if(!$this->getModel()){
-			throw new \ICE\core\Exception("Method require a model",0);
+			throw new ModelException("Method require a model",0);
 		}
 
 		if($query = $this->sqlgen->query()){
 		#	var_dump($query);
 			$this->getModel()->executeUpdate($query);
 		}else{
-			throw new \ICE\core\Exception("Tryed to run an empty query",0);
+			throw new ModelException("Tryed to run an empty query",0);
 		}
 	}
 	/*
@@ -713,7 +713,7 @@ function onePKName(){
 
 	function fetchAll(){
 		if(!$this->getModel()){
-			throw new \ICE\core\Exception("Method require a model",0);
+			throw new ModelException("Method require a model",0);
 		}
 		$query = $this->select()->query();
 		return $this->getModel()->fetchAll($query);
