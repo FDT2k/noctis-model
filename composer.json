@@ -1,0 +1,27 @@
+{
+    "name": "fdt2k/noctis-model",
+    "version":"1.0",
+    "description": "Default model layer for Noctis framework",
+    "license": "BSD-3-Clause-Attribution",
+    "authors": [
+        {
+            "name": "Fabien Di Tore",
+            "email": "fabien@ditore.ch"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "GKA\\Noctis\\Model\\": "src/"
+        }
+    },
+    "require": {
+        "fdt2k/common-libs-database":"*"
+    },
+    "repositories": [
+      {
+            "type": "vcs",
+            "url": "../ice-libs-database"
+        }
+      ]
+}
