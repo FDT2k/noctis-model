@@ -1,4 +1,4 @@
-<?php
+<<?php
 namespace GKA\Noctis\Model;
 
 
@@ -42,12 +42,12 @@ class Database extends AbstractModel{
 	}
 
 	function init(){
-		
+
 		if(is_array($this->_modelDef()) && sizeof($this->_modelDef())>0 && is_array($this->_tableDef()) && sizeof($this->_tableDef()) && Env::getConfig('model')->get('update_schema')){
 			$table = $this->_tableDef();
 			$datas = $this->_modelDef();
 
-			$this->setEntity(\ICE\lib\scaffolding\Entity::create($table['name'])->loadFromModelDef($datas,$table));
+			$this->setEntity(\GKA\Noctis\Model\Scaffolding\Entity::create($table['name'])->loadFromModelDef($datas,$table));
 		}
 		if(Env::getConfig('model')->get('update_schema')){
 		//	var_dump('init '.Env::getConfig('model')->get('update_schema'));
