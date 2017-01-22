@@ -1,5 +1,5 @@
 <?php
-namespace GKA\Noctis\Model\Scaffolding;
+namespace GKA\Noctis\Model;
 
 class ModelException extends \Exception{
 	public function __construct($message,$code,$title=""){
