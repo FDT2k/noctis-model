@@ -1,6 +1,6 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding;
-use \FDT2k\Helpers\StringHelper as StringHelper;
+use \FDT2k\Helpers\String as String;
 use \FDT2k\ICE\CORE\Env as Env;
 
 class EntityField extends \FDT2k\ICE\CORE\IObject {
@@ -295,7 +295,7 @@ class EntityField extends \FDT2k\ICE\CORE\IObject {
 
 	function parseCommentString($string){
 
-		$arr = \ICE\lib\helpers\StringHelper::parseMYSQLCommentString($string);
+		$arr = String::parseMYSQLCommentString($string);
 		//applying
 		if(!empty($arr['type'])){
 			$this->setType($arr['type']);
@@ -411,13 +411,13 @@ class EntityField extends \FDT2k\ICE\CORE\IObject {
 		}
 		#var_dump($this->getAlias(),$value,$this->isMandatory());
 		if($this->type == 'upload' || $this->type=='file'){
-			if(!$this->isMandatory() || !empty($_FILES[$this->getAlias()]['name']) || (!StringHelper::isEmpty($value))){
+			if(!$this->isMandatory() || !empty($_FILES[$this->getAlias()]['name']) || (!String::isEmpty($value))){
 				return true;
 			}else{
 				$this->setError(sprintf(('Field %1$s: you must select a file'),$this->getLabel()));
 			}
 		}else{
-			if(!$this->isMandatory() || (!StringHelper::isEmpty($value)) || (!StringHelper::isEmpty($this->getDefaultValue()) ) || $this->getType() == 'checkbox'){
+			if(!$this->isMandatory() || (!String::isEmpty($value)) || (!String::isEmpty($this->getDefaultValue()) ) || $this->getType() == 'checkbox'){
 				if($this->getMinLength() == 0 || strlen($value)>= $this->getMinLength()){
 					if($this->getMaxLength() == 0 || strlen($value) <= $this->getMaxLength()){
 						if(!$this->mandatory || $this->getType() != 'int' || (is_numeric($value) || is_float($value))){ // this is wrong
