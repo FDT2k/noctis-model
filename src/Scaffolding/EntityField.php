@@ -1,6 +1,6 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding;
-use \ICE\lib\helpers\StringHelper as StringHelper;
+use \FDT2k\Helpers\StringHelper as StringHelper;
 use \FDT2k\ICE\CORE\Env as Env;
 
 class EntityField extends \FDT2k\ICE\CORE\IObject {
