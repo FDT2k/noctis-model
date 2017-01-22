@@ -2,7 +2,7 @@
 namespace GKA\Noctis\Model\Scaffolding;
 use \FDT2k\ICE\CORE\Env as Env;
 
-class Entity extends \ICE\core\IObject {
+class Entity extends \FDT2k\ICE\CORE\IObject {
 
 	protected $isForeignKey = false;
 	static $loadedFieldsets;
