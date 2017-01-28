@@ -1,9 +1,9 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding;
 use \FDT2k\Helpers\String as String;
-use \FDT2k\Noctis\Core\Env as Env;
+use \IObjectEnv as Env;
 
-class EntityField extends \FDT2k\Noctis\Core\IObject {
+class EntityField extends \IObjectIObject {
 	/**
 		initialize from Array type returned by a mysqli_fetch_field_direct
 	**/

@@ -1,10 +1,10 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding;
 
-use \FDT2k\Noctis\Core\Env as Env;
+use \IObjectEnv as Env;
 use \GKA\Noctis\Model\ModelException as ModelException;
 
-class SQLGenerator extends \FDT2k\Noctis\Core\IObject {
+class SQLGenerator extends \IObjectIObject {
 
 
 	// generate a select query

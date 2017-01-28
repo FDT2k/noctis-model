@@ -1,14 +1,14 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding
 use \ICE\lib\helpers\StringHelper as StringHelper;
-use \FDT2k\Noctis\Core\Env as Env;
+use \IObjectEnv as Env;
 
 
 
 /*
 	Form helper class
 */
-class Form extends \ICE\core\IObject {
+class Form extends \IObject {
 	function __construct(){
 		$this->setMethod('POST');
 		$this->setIdentifier(uniqid());

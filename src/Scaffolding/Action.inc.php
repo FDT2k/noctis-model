@@ -2,7 +2,7 @@
 
 namespace GKA\Noctis\Model\Scaffolding;
 
-class Action extends \ICE\core\IObject {
+class Action extends \IObject {
 
 	function __construct(){
 		/*$this->name = $name;
