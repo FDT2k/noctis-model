@@ -2,7 +2,7 @@
 namespace GKA\Noctis\Model;
 
 
-use \FDT2k\ICE\CORE\Env as Env;
+use \FDT2k\Noctis\Core\Env as Env;
 
 class Database extends AbstractModel{
 	public $fieldFilter;

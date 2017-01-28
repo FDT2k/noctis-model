@@ -1,9 +1,9 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding;
-use \FDT2k\ICE\CORE\Env as Env;
+use \FDT2k\Noctis\Core\Env as Env;
 use \GKA\Noctis\Model\ModelException as ModelException;
 
-class Entity extends \FDT2k\ICE\CORE\IObject {
+class Entity extends \FDT2k\Noctis\Core\IObject {
 
 	protected $isForeignKey = false;
 	static $loadedFieldsets;
