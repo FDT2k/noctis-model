@@ -3,7 +3,7 @@ namespace GKA\Noctis\Model\Scaffolding;
 use \FDT2k\Helpers\String as String;
 use \IObjectEnv as Env;
 
-class EntityField extends \IObjectIObject {
+class EntityField extends \IObject {
 	/**
 		initialize from Array type returned by a mysqli_fetch_field_direct
 	**/

@@ -4,7 +4,7 @@ namespace GKA\Noctis\Model\Scaffolding;
 use \IObjectEnv as Env;
 use \GKA\Noctis\Model\ModelException as ModelException;
 
-class SQLGenerator extends \IObjectIObject {
+class SQLGenerator extends \IObject{
 
 
 	// generate a select query

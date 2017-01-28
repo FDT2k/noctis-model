@@ -3,7 +3,7 @@ namespace GKA\Noctis\Model\Scaffolding;
 use \IObjectEnv as Env;
 use \GKA\Noctis\Model\ModelException as ModelException;
 
-class Entity extends \IObjectIObject {
+class Entity extends \IObject {
 
 	protected $isForeignKey = false;
 	static $loadedFieldsets;
