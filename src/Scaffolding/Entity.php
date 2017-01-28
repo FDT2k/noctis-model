@@ -1,6 +1,6 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding;
-use \IObjectEnv as Env;
+use \FDT2k\Noctis\Core\Env as Env;
 use \GKA\Noctis\Model\ModelException as ModelException;
 
 class Entity extends \IObject {

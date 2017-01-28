@@ -1,7 +1,7 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding
 use \ICE\lib\helpers\StringHelper as StringHelper;
-use \IObjectEnv as Env;
+use \FDT2k\Noctis\Core\Env as Env;
 
 
 

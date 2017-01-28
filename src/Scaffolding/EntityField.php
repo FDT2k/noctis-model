@@ -1,7 +1,7 @@
 <?php
 namespace GKA\Noctis\Model\Scaffolding;
 use \FDT2k\Helpers\String as String;
-use \IObjectEnv as Env;
+use \FDT2k\Noctis\Core\Env as Env;
 
 class EntityField extends \IObject {
 	/**
