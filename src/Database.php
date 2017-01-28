@@ -92,7 +92,7 @@ class Database extends AbstractModel{
 						foreach($fixtures as $fix){
 				//			var_dump($fix);
 							$r = $this->store($fix);
-							var_dump($this->getLastQuery(),$this->getError());
+							//var_dump($this->getLastQuery(),$this->getError());
 						//	var_dump($this->getLastQuery());
 						}
 					}
