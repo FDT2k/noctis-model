@@ -1,5 +1,5 @@
 <?php
-namespace GKA\Noctis\Model\Scaffolding
+namespace GKA\Noctis\Model\Scaffolding;
 use \ICE\lib\helpers\StringHelper as StringHelper;
 use \FDT2k\Noctis\Core\Env as Env;
 
