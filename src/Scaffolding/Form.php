@@ -127,14 +127,20 @@ class Form extends \IObject {
 	}
 
 	function setDefaultActions(){
-
-		$this->addActions(sf\Action::create()->setAction('edit?id=:id')->setLabel('edit')->setClass('edit'));
-		$this->addActions(sf\Action::create()->setAction('delete?id=:id')->setLabel('delete')->setClass('trash'));
+		// let's grab primary keys from Entity
+		$pkeys =  $this->getEntity()->getPrimaryKeys();
+		$sep = "?";
+		foreach($pkeys as $key => $field){
+			$string .= $sep.$field->getName()."=:".$field->getName();
+			$sep = "&";
+		}
+		$this->addActions(Action::create()->setAction('edit'.$string)->setLabel('edit')->setClass('edit'));
+		$this->addActions(Action::create()->setAction('delete'.$string)->setLabel('delete')->setClass('trash')->setConfirmMessage(__('Etes vous sur de vouloir supprimer ceci?')));
 		return $this;
 	}
 	function setDefaultUniqueActions(){
 
-		$this->addUniqueActions(sf\Action::create()->setAction('add')->setLabel('add')->setClass('edit'));
+		$this->addUniqueActions(Action::create()->setAction('add')->setLabel('add')->setClass('edit'));
 
 		return $this;
 	}
@@ -208,8 +214,10 @@ class Form extends \IObject {
 		#var_dump($q);
 		//$this->setData($fs->fetchAll());
 		if($data = $this->getModel()->fetchAll($q)){
-			$this->setData($data);
+
+			$this->setRows($data);
 		}
+
 		return $this;
 	}
 
