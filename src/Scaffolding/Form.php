@@ -118,6 +118,13 @@ class Form extends \IObject {
 		$o->setEntity(sf\Entity::create()->loadFromTable($table))->setModel($model);
 		return $o;
 	}
+	static function createFromModel($model){
+		$class = get_called_class();
+		//var_dump();
+		$o = new $class();
+		$o->setEntity($model->getEntity())->setModel($model);
+		return $o;
+	}
 
 	function setDefaultActions(){
 
