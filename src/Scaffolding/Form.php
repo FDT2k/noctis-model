@@ -143,12 +143,12 @@ class Form extends \IObject {
 	}
 
 	function addEditAction(){
-		$string = $this->actionString()
+		$string = $this->actionString();
 		$this->addActions(Action::create()->setAction('edit'.$string)->setLabel('edit')->setClass('edit'));
 		return $this;
 	}
 	function addDeleteAction(){
-		$string = $this->actionString()
+		$string = $this->actionString();
 		$this->addActions(Action::create()->setAction('delete'.$string)->setLabel('delete')->setClass('trash')->setConfirmMessage(__('Etes vous sur de vouloir supprimer ceci?')));
 		return $this;
 	}
