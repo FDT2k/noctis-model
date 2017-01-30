@@ -128,18 +128,37 @@ class Form extends \IObject {
 
 	function setDefaultActions(){
 		// let's grab primary keys from Entity
+		$this->addEditAction();
+		$this->addDeleteAction();
+		return $this;
+	}
+	function actionString(){
 		$pkeys =  $this->getEntity()->getPrimaryKeys();
 		$sep = "?";
 		foreach($pkeys as $key => $field){
 			$string .= $sep.$field->getName()."=:".$field->getName();
 			$sep = "&";
 		}
+		return $string;
+	}
+
+	function addEditAction(){
+		$string = $this->actionString()
 		$this->addActions(Action::create()->setAction('edit'.$string)->setLabel('edit')->setClass('edit'));
+		return $this;
+	}
+	function addDeleteAction(){
+		$string = $this->actionString()
 		$this->addActions(Action::create()->setAction('delete'.$string)->setLabel('delete')->setClass('trash')->setConfirmMessage(__('Etes vous sur de vouloir supprimer ceci?')));
 		return $this;
 	}
 	function setDefaultUniqueActions(){
 
+		$this->addAddUnAction();
+		return $this;
+	}
+
+	function addAddUnAction(){
 		$this->addUniqueActions(Action::create()->setAction('add')->setLabel('add')->setClass('edit'));
 
 		return $this;
