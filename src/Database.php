@@ -46,6 +46,30 @@ class Database extends AbstractModel{
 		if(is_array($this->_modelDef()) && sizeof($this->_modelDef())>0 && is_array($this->_tableDef()) && sizeof($this->_tableDef()) && Env::getConfig('model')->get('update_schema')){
 			$table = $this->_tableDef();
 			$datas = $this->_modelDef();
+			//prior to initialize entity we have to sanitize relationship definition
+
+
+				if(isset($table) && is_array($table)){
+					if(isset($table['relationships']) && is_array($table['relationships'])){
+						foreach($table['relationships'] as $key => $rel){
+							$class =$rel['class'];
+							if(!empty($class) && class_exists($class) ){
+								$o = new $class();
+							//	$table['relationships'][$key]['referenced_table']=
+								$rel['ref_table']=$o->getTable();
+								if (empty($rel['ref_field'])){ // if not defined means that the field names are the same
+									$rel['ref_field']=$rel['field'];
+								}
+								if(empty($rel['name'])){
+									$rel['name']=  'fk_'.$rel['ref_field'].'_'.$rel['table'];
+								}
+
+								$table['relationships'][$key]=$rel;
+							}
+						}
+					}
+
+				}
 
 			$this->setEntity(\GKA\Noctis\Model\Scaffolding\Entity::create($table['name'])->loadFromModelDef($datas,$table));
 		}
@@ -76,6 +100,7 @@ class Database extends AbstractModel{
 		//var_dump($e);
 
 		if(null !== $this->getEntity()){
+
 
 			$this->getEntity()->migrate();
 

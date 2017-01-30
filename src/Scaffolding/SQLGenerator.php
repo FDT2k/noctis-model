@@ -180,13 +180,28 @@ class SQLGenerator extends \IObject{
 /**
 TODO multiple constraint / PKEY
 **/
+function countPrimaryKeys(){
+	$c =0;
+	$a = $this->getFields();
+	if(is_array($a)){
+		foreach($a as $f){
+			if($f->isPrimaryKey()){
+				$c++;
+			}
+		}
+	}
+	return $c;
+}
+
 	function generateCreateField($field,$prefix=''){
 		$constraint = "";
 
 		if($field->isMandatory()){
 			$constraint .= " NOT NULL ";
 		}
-		if($field->isPrimaryKey()){
+		$numpkey=$this->countPrimaryKeys();
+		if($field->isPrimaryKey() && $numpkey==1){
+
 			$constraint .= " PRIMARY KEY ";
 			//$this->hasFlags('auto_increment')
 			if($field->hasFlags('auto_increment')){
@@ -253,6 +268,17 @@ TODO multiple constraint / PKEY
 				foreach($this->getFields() as $field){
 					$sql.= $sep.$this->generateCreateField($field);
 					$sep=",";
+				}
+				if($this->countPrimaryKeys()>1){
+					$sql.=",primary key (";
+					$sep="";
+						foreach($this->getFields() as $field){
+							if($field->isPrimaryKey()){
+								$sql.=$sep.$field->getName();
+								$sep=",";
+							}
+						}
+					$sql.=")";
 				}
 				$sql.=")";
 				if($this->getEntity()->hasStorageEngine()){

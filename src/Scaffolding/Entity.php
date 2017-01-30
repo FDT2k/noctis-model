@@ -68,11 +68,22 @@ class Entity extends \IObject {
 		$table_exists = $db->tableExists($this->getTable());
 		if($table_exists){
 			//var_dump('table_exists');
+
 			Env::getLogger('sql')->log($this->getTable().' table exists');
 			$existing_entity = Entity::create()->loadFromTable($this->getTable());
 			//var_dump($existing_entity);
+
+
+
+
 			if(($altered_fields = $this->compareFields($existing_entity))!==true){
 			//	var_dump($this->getTable().' table is different');
+
+			// table exists, we drop any constraint
+			//alter table footable drop foreign key fk_name;
+
+			// adding constriant : ALTER TABLE users ADD CONSTRAINT fk_NAME FOREIGN KEY (grade_id) REFERENCES remotetable(remotefield);
+
 				Env::getLogger('sql')->log($this->getTable().' table is different from server');
 
 				$keys = array_keys($this->getValues());
@@ -286,6 +297,11 @@ var_dump($f2->getCollation(), $field->getCollation());
 			$this->setCollation($tabledef['mysql_collation']);
 		}else{
 			$this->setCollation(Env::getConfig('database')->get('collation'));
+		}
+		if(isset($tabledef['relationships']) && is_array($tabledef['relationships'])){
+			foreach($tabledef['relationships'] as $rel){
+				$this->addRelationShips(EntityRelation::create()->setEntity($this)->initFromDef($rel));
+			}
 		}
 		foreach($def as $key => $field){
 			$eField = EntityField::create()->setEntity($this)->initFromDef($key,$field);
