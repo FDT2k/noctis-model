@@ -7,7 +7,9 @@ class EntityRelation extends \IObject {
 
   function initFromDef($array){
 
-    $this->setReferencedField($array['ref_field']);
-    $this->setReferencedTable($array['ref_table'])
+    $this->setRefField($array['ref_field']);
+    $this->setRefTable($array['ref_table']);
+
+    return $this;
   }
 }
