@@ -322,8 +322,14 @@ function countPrimaryKeys(){
 
 					}
 				}
-				if(is_array($this->getRelationshipsToDelete())){
+				if(is_array($this->getRelationShipsToDelete())){
 					// alter table footable drop foreign key fk_name;
+					foreach ($this->getRelationShipsToDelete() as $rel){
+
+						//alter table footable drop foreign key fk_name;
+						$sql .=" DROP FOREIGN KEY ".$rel->getName()." ";
+
+					}
 				}
 				$sql.="";
 		/*		if($this->getEntity()->hasStorageEngine()){
@@ -421,6 +427,8 @@ function countPrimaryKeys(){
 		$this->setFieldsToDelete(NULL);
 		$this->setFieldsToModify(NULL);
 		$this->setDropPKey(false);
+		$this->setRelationShipsToDelete(NULL);
+		$this->setRelationShips(NULL);
 	}
 
 }

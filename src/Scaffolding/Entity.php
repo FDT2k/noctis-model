@@ -87,6 +87,16 @@ class Entity extends \IObject {
 
 				Env::getLogger('sql')->log($this->getTable().' table is different from server');
 
+				// remove any Foreign key
+				if ($rels = $this->getRelationShips()){
+					foreach($rels as $r){
+						$sql = $this->sqlgen->alterTable()->setRelationShipsToDelete(array($r))->query();
+				//		var_dump($sql);
+						$this->getDB()->executeUpdate($sql);
+
+					}
+				}
+
 				$keys = array_keys($this->getValues());
 			//	var_dump($keys);
 				$ex_keys = array_keys($existing_entity->getValues());
@@ -183,16 +193,19 @@ class Entity extends \IObject {
 				$q = $this->sqlgen->alterTable()->setFieldsToModify($altered_fields)->query();
 			//	var_dump($q);
 				$r = $this->getDB()->executeUpdate($q);
-
-				if ($rels = $this->getRelationShips()){
-					foreach($rels as $r){
-						$sql = $this->sqlgen->alterTable()->addRelationships($r)->query();
-						$r = $this->getDB()->executeUpdate($q);
-					}
-				}
 				if(!$r ){
 					throw new \Exception("migration failed ".$this->getDB()->getErrorString());
 				}
+
+				
+				if ($rels = $this->getRelationShips()){
+					foreach($rels as $r){
+						$sql = $this->sqlgen->alterTable()->setRelationShips(array($r))->query();
+				//		var_dump($sql);
+						$r = $this->getDB()->executeUpdate($sql);
+					}
+				}
+
 				//first we copy the table
 
 				//second we copy the Database
@@ -224,8 +237,8 @@ class Entity extends \IObject {
 			if ($rels = $this->getRelationShips()){
 				foreach($rels as $r){
 					$sql = $this->sqlgen->alterTable()->setRelationShips(array($r))->query();
-					//var_dump($sql);
-					$r = $this->getDB()->executeUpdate($q);
+				//	var_dump($sql);
+					$r = $this->getDB()->executeUpdate($sql);
 				}
 			}
 		///	var_dump($s);
