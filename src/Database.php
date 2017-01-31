@@ -471,20 +471,20 @@ class Database extends AbstractModel{
 
 	function beginTransaction(){
 		if(!$this->db->executeUpdate('START TRANSACTION;')){
-			throw new DatabaseException("Failed to start transaction");
+			throw new \Exception("Failed to start transaction");
 		}
 	}
 
 	function rollback(){
 		if(!$this->db->executeUpdate('ROLLBACK;')){
-			throw new DatabaseException("Failed to rollback transaction");
+			throw new \Exception("Failed to rollback transaction");
 		}
 
 	}
 
 	function commit(){
 		if(!$this->db->executeUpdate('COMMIT;')){
-			throw new DatabaseException("Failed to commit transaction");
+			throw new \Exception("Failed to commit transaction");
 		}
 
 	}
