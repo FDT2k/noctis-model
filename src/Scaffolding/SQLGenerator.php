@@ -314,6 +314,17 @@ function countPrimaryKeys(){
 					$sql.= "DROP PRIMARY KEY";
 				}
 
+				if(is_array($this->getRelationShips())){
+					foreach ($this->getRelationShips() as $rel){
+
+						// ALTER TABLE users ADD CONSTRAINT fk_NAME FOREIGN KEY (grade_id) REFERENCES remotetable(remotefield);
+						$sql .=" ADD CONSTRAINT ".$rel->getName()." FOREIGN KEY (".$rel->getField().") REFERENCES ".$rel->getRefTable()."(".$rel->getRefField().")";
+
+					}
+				}
+				if(is_array($this->getRelationshipsToDelete())){
+					// alter table footable drop foreign key fk_name;
+				}
 				$sql.="";
 		/*		if($this->getEntity()->hasStorageEngine()){
 					$sql.= " ENGINE=".$this->getEntity()->getStorageEngine();

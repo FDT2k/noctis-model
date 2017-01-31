@@ -64,6 +64,7 @@ class Entity extends \IObject {
 	**/
 	function migrate(){
 		$db = $this->getDB();
+		//var_dump($this->getRelationShips());
 		Env::getLogger('sql')->startLog('migrating');
 		$table_exists = $db->tableExists($this->getTable());
 		if($table_exists){
@@ -82,7 +83,7 @@ class Entity extends \IObject {
 			// table exists, we drop any constraint
 			//alter table footable drop foreign key fk_name;
 
-			// adding constriant : ALTER TABLE users ADD CONSTRAINT fk_NAME FOREIGN KEY (grade_id) REFERENCES remotetable(remotefield);
+			// adding constraint : ALTER TABLE users ADD CONSTRAINT fk_NAME FOREIGN KEY (grade_id) REFERENCES remotetable(remotefield);
 
 				Env::getLogger('sql')->log($this->getTable().' table is different from server');
 
@@ -183,6 +184,12 @@ class Entity extends \IObject {
 			//	var_dump($q);
 				$r = $this->getDB()->executeUpdate($q);
 
+				if ($rels = $this->getRelationShips()){
+					foreach($rels as $r){
+						$sql = $this->sqlgen->alterTable()->addRelationships($r)->query();
+						$r = $this->getDB()->executeUpdate($q);
+					}
+				}
 				if(!$r ){
 					throw new \Exception("migration failed ".$this->getDB()->getErrorString());
 				}
@@ -194,6 +201,9 @@ class Entity extends \IObject {
 
 				//migrate the Database
 				//drop and rename
+
+				//recreate foreign_kesys
+
 			}else{
 			//	var_dump('identical tables');
 				Env::getLogger('sql')->log($this->getTable().' table is identical on server');
@@ -202,10 +212,21 @@ class Entity extends \IObject {
 			//create the table;
 
 			$s= $this->sqlgen->createTable($this->getFields())->query();
+		/*	$this->withFields(function($o){
+				var_dump($o->getName(),$o->hasFlags('auto_increment'));
+			});*/
+		//	var_dump($s);
 			$result = $this->getDB()->executeUpdate($s);
 
 			if(!$result){
 					throw new ModelException('SQL ERROR: '.$this->getDB()->getErrorString(),0);
+			}
+			if ($rels = $this->getRelationShips()){
+				foreach($rels as $r){
+					$sql = $this->sqlgen->alterTable()->setRelationShips(array($r))->query();
+					//var_dump($sql);
+					$r = $this->getDB()->executeUpdate($q);
+				}
 			}
 		///	var_dump($s);
 		//	var_dump($this->getDB()->getErrorString());
@@ -300,6 +321,7 @@ var_dump($f2->getCollation(), $field->getCollation());
 		}
 		if(isset($tabledef['relationships']) && is_array($tabledef['relationships'])){
 			foreach($tabledef['relationships'] as $rel){
+				//var_dump($rel);
 				$this->addRelationShips(EntityRelation::create()->setEntity($this)->initFromDef($rel));
 			}
 		}
