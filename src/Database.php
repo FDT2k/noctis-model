@@ -469,6 +469,26 @@ class Database extends AbstractModel{
 		return $sorted;
 	}
 
+	function beginTransaction(){
+		if(!$this->db->executeUpdate('START TRANSACTION;')){
+			throw new DatabaseException("Failed to start transaction");
+		}
+	}
+
+	function rollback(){
+		if(!$this->db->executeUpdate('ROLLBACK;')){
+			throw new DatabaseException("Failed to rollback transaction");
+		}
+
+	}
+
+	function commit(){
+		if(!$this->db->executeUpdate('COMMIT;')){
+			throw new DatabaseException("Failed to commit transaction");
+		}
+
+	}
+
 	function order($sort){
 		if(is_array($sort) && $sort >0){
 			$order = " ORDER BY ";
