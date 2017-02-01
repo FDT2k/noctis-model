@@ -167,27 +167,28 @@ class Database extends AbstractModel{
 		return $this;
 	}
 
-	function prepareSelect($selectedFields){
+	function prepareSelect($selectedFields=array()){
 		if(empty($table)){
 			$table = $this->getEntity()->getTable();
 		}
 		if($this->hasEntity()){
 
-			$this->query = $this->getEntity()->select()->where($keys)->query();
+			$this->query = $this->getEntity()->select()->query();
 
 
 		}else{
 			throw new \Exception("no entity defined");
 
 		}
+		return $this;
 	}
 	function where($keys){
 		if(!empty($this->query)){
 			$this->query = $this->getEntity()->where($keys)->query();
 		}else{
 			throw new \Exception("Where used when query empty", 1);
-
 		}
+		return $this;
 	}
 
 	function executeUpdate($query=""){
