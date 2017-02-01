@@ -322,6 +322,9 @@ class Database extends AbstractModel{
 		return $datas;
 
 	}
+	function fetchAllSortedByKey($key){
+		return $this->fetchAllS($key);
+	}
 
 	function fetchAll($query="",$timeout=-1,$pagesize=0,$currentpage=0){
 		$datas = false;
