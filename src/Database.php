@@ -153,7 +153,7 @@ class Database extends AbstractModel{
 	function prepareQuery($query,$values){
 	//	throw  new ModelException("debug",0);
 		if(!empty($this->query)){
-			trigger_error("Query not empty. Don't forget to clear any unfinished query",E_WARNING);
+			trigger_error("Query not empty. Don't forget to clear any unfinished query",E_USER_WARNING);
 		}
 		if(is_array($values)){
 			foreach($values as $key => $value){
@@ -738,7 +738,7 @@ class Database extends AbstractModel{
 
 	function select($keys=array(),$multiline=false,$table=''){
 		//var_dump($this->hasFieldSet());
-		trigger_error ("Deprecated, use prepareSelect instead",E_WARNING);
+		trigger_error ("Deprecated, use prepareSelect instead",E_USER_WARNING);
 		if(empty($table)){
 			$table = $this->getEntity()->getTable();
 		}
