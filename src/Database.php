@@ -738,7 +738,7 @@ class Database extends AbstractModel{
 
 	function select($keys=array(),$multiline=false,$table=''){
 		//var_dump($this->hasFieldSet());
-		trigger_error ("Deprecated, use prepareSelect instead",E_USER_WARNING);
+	//	trigger_error ("Deprecated, use prepareSelect instead",E_USER_WARNING);
 		if(empty($table)){
 			$table = $this->getEntity()->getTable();
 		}
