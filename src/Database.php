@@ -152,6 +152,9 @@ class Database extends AbstractModel{
 
 	function prepareQuery($query,$values){
 	//	throw  new ModelException("debug",0);
+		if(!empty($this->query)){
+			trigger_error("Query not empty. Don't forget to clear any unfinished query",E_WARNING);
+		}
 		if(is_array($values)){
 			foreach($values as $key => $value){
 				$value = $this->prepareValue($value);
@@ -162,6 +165,29 @@ class Database extends AbstractModel{
 		}
 		$this->query = $query;
 		return $this;
+	}
+
+	function prepareSelect($selectedFields){
+		if(empty($table)){
+			$table = $this->getEntity()->getTable();
+		}
+		if($this->hasEntity()){
+
+			$this->query = $this->getEntity()->select()->where($keys)->query();
+
+
+		}else{
+			throw new \Exception("no entity defined");
+
+		}
+	}
+	function where($keys){
+		if(!empty($this->query)){
+			$this->query = $this->getEntity()->where($keys)->query();
+		}else{
+			throw new \Exception("Where used when query empty", 1);
+
+		}
 	}
 
 	function executeUpdate($query=""){
@@ -708,9 +734,11 @@ class Database extends AbstractModel{
 		return false;
 	}
 
+
+
 	function select($keys=array(),$multiline=false,$table=''){
 		//var_dump($this->hasFieldSet());
-
+		trigger_error ("Deprecated, use prepareSelect instead",E_WARNING);
 		if(empty($table)){
 			$table = $this->getEntity()->getTable();
 		}
