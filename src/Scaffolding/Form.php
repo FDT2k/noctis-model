@@ -13,6 +13,8 @@ class Form extends \IObject {
 		$this->setMethod('POST');
 		$this->setIdentifier(uniqid());
 		$this->setTrueForm(true); // true form means some things like rendering the <form tag  this doesnt happen when form are part of a form group
+		$this->setSaveAction('_save');
+		$this->setDeleteAction('_delete');
 	}
 
 	public function handleSave($post){
