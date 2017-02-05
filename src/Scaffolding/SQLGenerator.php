@@ -102,7 +102,7 @@ class SQLGenerator extends \IObject{
 
 	function where($fields){
 	//	$this->setWhere($fields);
-		if($this->hasWhere()){
+		if($this->hasWhereExp()){
 			throw new \Exception("you can't use where and whereExp at the same time");
 		}
 		if(is_array($fields)){
@@ -116,11 +116,11 @@ class SQLGenerator extends \IObject{
 
 	}
 
-	function whereExpr($expr){
+	function whereExp($expr){
 		if($this->hasWhere()){
 			throw new \Exception("you can't use where and whereExp at the same time");
 		}
-		$this->setWhereExpr($expr);
+		$this->setWhereExp($expr);
 		return $this;
 	}
 
