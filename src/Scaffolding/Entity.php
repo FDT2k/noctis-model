@@ -197,7 +197,7 @@ class Entity extends \IObject {
 					throw new \Exception("migration failed ".$this->getDB()->getErrorString());
 				}
 
-				
+
 				if ($rels = $this->getRelationShips()){
 					foreach($rels as $r){
 						$sql = $this->sqlgen->alterTable()->setRelationShips(array($r))->query();
@@ -690,7 +690,9 @@ function onePKName(){
 	return $pk;
 }
 	/**
-		Requesting a scalar type means we do a rquest on the primary key.
+		Requesting a scalar type means we do a rquest on a single primary key.
+
+		understanding a single value
 	**/
 	function unscalarize($fields){
 		if(is_scalar($fields)){
@@ -702,6 +704,7 @@ function onePKName(){
 				$fields[$pk->getName()]=$value;
 			}else{
 				$this->setError("You cannot request a scalar value when multiple primary keys defined in table",1002);
+				throw new \Exception("You cannot request a scalar value when multiple primary keys defined in table");
 			}
 		}
 		return $fields;
@@ -730,6 +733,11 @@ function onePKName(){
 
 		return $this;
 
+	}
+
+	function whereExp($expr){
+		$this->sqlgen->whereExp($expr);
+		return $this;
 	}
 
 	function delete($fields=''){

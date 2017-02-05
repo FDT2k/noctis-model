@@ -102,6 +102,9 @@ class SQLGenerator extends \IObject{
 
 	function where($fields){
 	//	$this->setWhere($fields);
+		if($this->hasWhere()){
+			throw new \Exception("you can't use where and whereExp at the same time");
+		}
 		if(is_array($fields)){
 			foreach($fields as $f){
 				$this->addWhere($f);
@@ -111,6 +114,14 @@ class SQLGenerator extends \IObject{
 		}
 		return $this;
 
+	}
+
+	function whereExpr($expr){
+		if($this->hasWhere()){
+			throw new \Exception("you can't use where and whereExp at the same time");
+		}
+		$this->setWhereExpr($expr);
+		return $this;
 	}
 
 	function convertString($field){
@@ -378,6 +389,10 @@ function countPrimaryKeys(){
 					$sep =" and ";
 				}
 			}
+		}
+
+		if($this->hasWhereExp() && $this->getMethod() != "INSERT"){
+			$sql .= " where ".$this->getWhereExp();
 		}
 
 		if($this->hasOrderBy() && $this->getMethod()=="SELECT"){

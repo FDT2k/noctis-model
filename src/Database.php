@@ -607,13 +607,17 @@ class Database extends AbstractModel{
 	}
 
 	function update($datas,$id,$table='',$check=true){
+
 		if(empty($table)){
 			$table = $this->getEntity()->getTable();
 		}
 
 		if($this->hasEntity()){
-			$query = $this->getEntity()->update($datas)->where($id)->query();
-
+			if(is_array($id)){
+				$query = $this->getEntity()->update($datas)->where($id)->query();
+			}else{
+				$query = $this->getEntity()->update($datas)->whereExp($id)->query();
+			}
 			return $this->executeUpdate($query);
 		}else{
 			#var_dump($datas);
