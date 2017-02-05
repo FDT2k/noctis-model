@@ -231,7 +231,7 @@ class Form extends \IObject {
 
 
 		if($data = $this->getModel()->select($filter)){
-
+			
 			$this->setRows($data);
 		}
 

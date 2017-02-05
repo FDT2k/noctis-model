@@ -435,15 +435,25 @@ function countPrimaryKeys(){
 		return $sql;
 	}
 
+	function hold(){
+		$this->hold = true;
+		return $this;
+	}
+
 	function reset(){
-		$this->setFields(NULL);
-		$this->setWhere(NULL);
-		$this->setFieldsToAdd(NULL);
-		$this->setFieldsToDelete(NULL);
-		$this->setFieldsToModify(NULL);
-		$this->setDropPKey(false);
-		$this->setRelationShipsToDelete(NULL);
-		$this->setRelationShips(NULL);
+		if(!$this->hold){
+			$this->setFields(NULL);
+			$this->setWhere(NULL);
+			$this->setFieldsToAdd(NULL);
+			$this->setFieldsToDelete(NULL);
+			$this->setFieldsToModify(NULL);
+			$this->setDropPKey(false);
+			$this->setRelationShipsToDelete(NULL);
+			$this->setRelationShips(NULL);
+			$this->setWhereExp(NULL);
+		}
+		$this->hold = false;
+		return $this;
 	}
 
 }
