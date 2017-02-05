@@ -753,6 +753,10 @@ class Database extends AbstractModel{
 			$table = $this->getEntity()->getTable();
 		}
 		if($this->hasEntity()){
+			if(method_exists($this,"_defaultFilter") && $this->_defaultFilter() && empty($keys)) {
+				$keys = $this->_defaultFilter() ;
+			}
+
 			if(!is_array($keys)){
 				$query = $this->getEntity()->select()->whereExp($keys)->query();
 

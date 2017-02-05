@@ -223,18 +223,14 @@ class Form extends \IObject {
 		return $this;
 	}
 
-	function listing($filter =''){
+	function listing($filter =array()){
 		$post = Env::$post;
 		$get = Env::$get;
 
 		$fs = $this->getEntity();
 
-		//$q = $e -> select('*') -> query();
 
-		$q = $fs->select()->where($filter)->query();
-		#var_dump($q);
-		//$this->setData($fs->fetchAll());
-		if($data = $this->getModel()->fetchAll($q)){
+		if($data = $this->getModel()->select($filter)){
 
 			$this->setRows($data);
 		}
