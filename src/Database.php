@@ -619,6 +619,7 @@ class Database extends AbstractModel{
 				$query = $this->getEntity()->update($datas)->whereExp($id)->query();
 			}
 			return $this->executeUpdate($query);
+
 		}else{
 			#var_dump($datas);
 			// transforming all the values;
@@ -641,6 +642,7 @@ class Database extends AbstractModel{
 				//var_dump($new_datas);
 				$datas = $new_datas;
 			}
+
 			$sSQL="update %s set %s where %s";
 			$where ="";
 			$values="";
@@ -744,16 +746,19 @@ class Database extends AbstractModel{
 
 
 
-	function select($keys=array(),$multiline=false,$table=''){
+	function select($keys='',$multiline=false,$table=''){
 		//var_dump($this->hasFieldSet());
 	//	trigger_error ("Deprecated, use prepareSelect instead",E_USER_WARNING);
 		if(empty($table)){
 			$table = $this->getEntity()->getTable();
 		}
 		if($this->hasEntity()){
+			if(!is_array($keys)){
+				$query = $this->getEntity()->select()->whereExp($keys)->query();
 
-			$query = $this->getEntity()->select()->where($keys)->query();
-
+			}else{
+				$query = $this->getEntity()->select()->where($keys)->query();
+			}
 
 		}else{
 			$sSQL="Select * from `%s`  %s";

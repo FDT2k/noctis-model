@@ -223,7 +223,7 @@ class Form extends \IObject {
 		return $this;
 	}
 
-	function listing($filter =array()){
+	function listing($filter =''){
 		$post = Env::$post;
 		$get = Env::$get;
 
