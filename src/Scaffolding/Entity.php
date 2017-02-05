@@ -476,7 +476,6 @@ var_dump($f2->getCollation(), $field->getCollation());
 					}
 				}
 
-
 				if($field->getType() == 'datetime' && !empty($value) &&($format=Env::getConfig('formats')->get('dateTimeFormatTransform'))){
 					//dateTimeFormatSourceCheck
 
@@ -642,7 +641,7 @@ var_dump($f2->getCollation(), $field->getCollation());
 			$fields = $this->getFields();
 		}
 
-		$this->sqlgen->hold()->select($fields);
+		$this->sqlgen->select($fields);
 
 		return $this;
 	}

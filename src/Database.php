@@ -168,12 +168,12 @@ class Database extends AbstractModel{
 	}
 
 	function prepareSelect($selectedFields=array()){
-
+		if(empty($table)){
+			$table = $this->getEntity()->getTable();
+		}
 		if($this->hasEntity()){
 
 			$this->query = $this->getEntity()->select()->query();
-
-
 
 
 		}else{
@@ -182,19 +182,9 @@ class Database extends AbstractModel{
 		}
 		return $this;
 	}
-	function where($keys=""){
+	function where($keys){
 		if(!empty($this->query)){
-			if(method_exists($this,"_defaultFilter") && $this->_defaultFilter() && empty($keys)) {
-				$keys = $this->_defaultFilter() ;
-			}
-
-			if(!is_array($keys)){
-				$this->query = $this->getEntity()->whereExp($keys)->query();
-
-			}else{
-				$this->query = $this->getEntity()->where($keys)->query();
-			}
-
+			$this->query = $this->getEntity()->where($keys)->query();
 		}else{
 			throw new \Exception("Where used when query empty", 1);
 		}
