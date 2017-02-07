@@ -92,7 +92,6 @@ class EntityField extends \IObject {
 		}
 		$this->setType($type);
 		$this->setMandatory(boolval($def['mandatory']));
-		$this->setHidden(boolval($def['hidden']));
 		$this->setSQL(true);
 		if($def['primary']==true){
 			$this->setPrimaryKey(True);
