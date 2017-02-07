@@ -444,6 +444,7 @@ function countPrimaryKeys(){
 		$this->setDropPKey(false);
 		$this->setRelationShipsToDelete(NULL);
 		$this->setRelationShips(NULL);
+		$this->setWhereExp(NULL);
 	}
 
 }
