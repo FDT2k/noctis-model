@@ -230,7 +230,7 @@ class Form extends \IObject {
 		$fs = $this->getEntity();
 
 
-		if($data = $this->getModel()->select($filter)){
+		if($data = $this->getModel()->select($filter,true)){
 
 			$this->setRows($data);
 		}
