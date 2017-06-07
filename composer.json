@@ -1,5 +1,5 @@
 {
-    "name": "gka/noctis-model",
+    "name": "fdt2k/noctis-model",
     "version":"1.0",
     "description": "Default model layer for Noctis framework",
     "license": "BSD-3-Clause-Attribution",
@@ -19,41 +19,6 @@
         "fdt2k/common-libs-database":"*",
         "fdt2k/baseobject":"*",
         "fdt2k/noctis-framework":"*",
-        "fdt2k/configmanager":"*"
-    },
-    "repositories": [
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/noctis-xtpl.git"
-      },
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/config-manager.git"
-      },
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/noctis-framework.git"
-      },
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/phplibs.git"
-      },
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/noctis-model.git"
-      },
-
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/php-database-lib.git"
-      },
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/noctis-mailer.git"
-      },
-      {
-          "type": "vcs",
-          "url": "https://git.geekagency.ch/FDT2k/php-root-object.git"
-      }
-      ]
+        "fdt2k/config-manager":"*"
+    }
 }
