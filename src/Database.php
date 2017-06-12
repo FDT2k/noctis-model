@@ -100,7 +100,7 @@ class Database extends AbstractModel{
 	//	$e = \ICE\lib\scaffolding\Entity::create($table['name'])->loadFromModelDef($datas,$table);
 		//var_dump($e);
 
-		if(null !== $this->getEntity()){
+		if($this->getEntity()){
 
 
 			$this->getEntity()->migrate();
@@ -387,6 +387,7 @@ class Database extends AbstractModel{
 	//	var_dump($query,$this->db->getError());
 		if($rs && $rs->hasResult()){
       if($result = $rs->fetchAssoc()){
+				$this->query = "";
       	return $this->processRow($result);
       }
 		}else{
